@@ -72,8 +72,8 @@
             if (name === "") {
                 nameError.textContent = "Name is required!";
                 valid = false;
-            } else if (name.length < 3) {
-                nameError.textContent = "Name must be at least 3 characters!";
+            } else if (!/^[a-zA-Z\s]{3,}$/.test(name)) {
+                nameError.textContent = "Name must be at least 3 characters and contain only letters.";
                 valid = false;
             }
 
