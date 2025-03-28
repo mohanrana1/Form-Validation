@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM VALIDATIO BY JS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+    
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-2xl font-bold text-center mb-4">User Information</h2>
+        
+        <form id="userForm">
+            
+           
+            <div class="mb-4">
+                <label class="block text-gray-700" for="name">Name:</label>
+                <input type="text" id="name" name="name" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <span id="nameError" class="text-red-500 text-sm"></span>
+            </div>
+
+            
+            <div class="mb-4">
+                <label class="block text-gray-700" for="age">Age:</label>
+                <input type="number" id="age" name="age" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <span id="ageError" class="text-red-500 text-sm"></span>
+            </div>
+
+            
+            <div class="mb-4">
+                <label class="block text-gray-700" for="address">Address:</label>
+                <textarea id="address" name="address" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required></textarea>
+                <span id="addressError" class="text-red-500 text-sm"></span>
+            </div>
+
+            
+            <div class="mb-4">
+                <label class="block text-gray-700" for="email">Email:</label>
+                <input type="email" id="email" name="email" class="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+                <span id="emailError" class="text-red-500 text-sm"></span>
+            </div>
+
+           
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("userForm").addEventListener("submit", function(event) {
+            let valid = true;
+
+            // Get form elements
+            let name = document.getElementById("name").value.trim();
+            let age = document.getElementById("age").value.trim();
+            let address = document.getElementById("address").value.trim();
+            let email = document.getElementById("email").value.trim();
+
+            // Error elements
+            let nameError = document.getElementById("nameError");
+            let ageError = document.getElementById("ageError");
+            let addressError = document.getElementById("addressError");
+            let emailError = document.getElementById("emailError");
+
+            // Clear previous errors
+            nameError.textContent = "";
+            ageError.textContent = "";
+            addressError.textContent = "";
+            emailError.textContent = "";
+
+            // Name validation
+            if (name === "") {
+                nameError.textContent = "Name is required!";
+                valid = false;
+            } else if (name.length < 3) {
+                nameError.textContent = "Name must be at least 3 characters!";
+                valid = false;
+            }
+
+            // Age validation
+            if (age === "") {
+                ageError.textContent = "Age is required!";
+                valid = false;
+            } else if (isNaN(age) || age < 1) {
+                ageError.textContent = "Enter a valid age!";
+                valid = false;
+            }
+
+            // Address validation
+            if (address === "") {
+                addressError.textContent = "Address is required!";
+                valid = false;
+            }
+
+            // Email validation
+            if (email === "") {
+                emailError.textContent = "Email is required!";
+                valid = false;
+            } else if (!/\S+@\S+\.\S+/.test(email)) {
+                emailError.textContent = "Enter a valid email!";
+                valid = false;
+            }
+
+            // Prevent form submission if validation fails
+            if (!valid) {
+                event.preventDefault();
+            }
+        });
+    </script>
+
+</body>
+</html>
